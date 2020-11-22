@@ -1,5 +1,6 @@
 package GUI;
 
 public class prueba {
-	//Moral muchachos 
+	//Moral muchachos
+	//sera que si hay moral?
 }
