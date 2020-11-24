@@ -3,15 +3,14 @@ package GUI;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -54,18 +53,22 @@ public class VentanaPrincipal extends Application {
 		
 		// Entrada
 		VBox vbox = new VBox();
+		
 		vbox.setStyle(
 				"-fx-border-style: dotted;" +
 				"-fx-padding: 10;" +
 		        "-fx-border-color: gray;");
+		vbox.setAlignment(Pos.CENTER);
+		
+		FieldPanel field = new FieldPanel();
 
-		vbox.getChildren().add(proceso1Inputs());
-		vbox.getChildren().add(aceptarBorrarHBox());
+		vbox.getChildren().add(new Group(field));
+		vbox.getChildren().add(aceptarBorrarHBox());		
 		
-		
-		
-		
-		panelProceso1.getChildren().addAll(labelNombre, labelDescripcion, vbox);
+		panelProceso1.getChildren().addAll(
+				labelNombre,
+				labelDescripcion,
+				vbox);
 		return panelProceso1;
 	}
 	
@@ -80,38 +83,6 @@ public class VentanaPrincipal extends Application {
 		return hbox;
 	}
 	
-	private GridPane proceso1Inputs() {
-		GridPane procesoUnoInputs = new GridPane();
-		
-		// Entrada 1 Label
-		Label labelEntradaUno = new Label("Entre un valor para texto 1");
-		GridPane.setConstraints(labelEntradaUno, 0, 0);
-		labelEntradaUno.prefWidthProperty().bind(procesoUnoInputs.widthProperty());;
-		
-		// Entrada 1 TextField
-		TextField textEntradaUno = new TextField("ingrese el valor para la entrada 1");
-		GridPane.setConstraints(textEntradaUno, 1, 0);
-		textEntradaUno.prefWidthProperty().bind(procesoUnoInputs.widthProperty());
-		
-		// Entrada 2 Label
-		Label labelEntradaDos = new Label("Entre un valor para texto 2");
-		GridPane.setConstraints(labelEntradaDos, 0, 1);
-		labelEntradaDos.prefWidthProperty().bind(procesoUnoInputs.widthProperty());;
-		
-		// Entrada 2 TextField
-		TextField textEntradaDos = new TextField("ingrese el valor para la entrada 2 ");
-		GridPane.setConstraints(textEntradaDos, 1, 1);
-		textEntradaDos.prefWidthProperty().bind(procesoUnoInputs.widthProperty());
-		
-		procesoUnoInputs.getChildren().addAll(
-				labelEntradaUno,
-				textEntradaUno,
-				labelEntradaDos,
-				textEntradaDos);
-		
-		
-		return procesoUnoInputs;
-	}
 
 	private MenuBar mainMenu() {
 		// Archivo
@@ -123,6 +94,9 @@ public class VentanaPrincipal extends Application {
 		// Procesos y Consultas
 		Menu menuProcesosYConsultas = new Menu("Procesos y Consultas");
 		menuProcesosYConsultas.getItems().add(new MenuItem("Proceso 1"));
+		menuProcesosYConsultas.getItems().add(new MenuItem("Proceso 1"));
+		menuProcesosYConsultas.getItems().add(new MenuItem("Proceso 1"));
+
 		
 		// Ayuda
 		Menu menuAyuda = new Menu("Ayuda");
