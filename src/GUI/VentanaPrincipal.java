@@ -39,7 +39,7 @@ public class VentanaPrincipal extends Application {
 	private VBox proceso1() {
 		VBox panelProceso1 = new VBox();
 		panelProceso1.setPadding(new Insets(10));
-		panelProceso1.setSpacing(8);
+		panelProceso1.setSpacing(5);
 		panelProceso1.setAlignment(Pos.BASELINE_CENTER);
 
 		
@@ -93,10 +93,15 @@ public class VentanaPrincipal extends Application {
 		
 		// Procesos y Consultas
 		Menu menuProcesosYConsultas = new Menu("Procesos y Consultas");
-		menuProcesosYConsultas.getItems().add(new MenuItem("Proceso 1"));
-		menuProcesosYConsultas.getItems().add(new MenuItem("Proceso 1"));
-		menuProcesosYConsultas.getItems().add(new MenuItem("Proceso 1"));
-
+		menuProcesosYConsultas.getItems().add(new MenuItem("Mostras detalles basicos del hospital"));
+		menuProcesosYConsultas.getItems().add(new MenuItem("Ingresar Paciente al sistema"));
+		menuProcesosYConsultas.getItems().add(new MenuItem("Crear Solicitud de aprobacion de procedimineto para paciente existente"));
+		menuProcesosYConsultas.getItems().add(new MenuItem("Aprobar solicitud (Sujeto a disponibilidad de habitaciones)"));
+		menuProcesosYConsultas.getItems().add(new MenuItem("Pagar deudas de paciente"));
+		menuProcesosYConsultas.getItems().add(new MenuItem("Finalizar procedimiento"));
+		menuProcesosYConsultas.getItems().add(new MenuItem("Dar de alta"));
+		menuProcesosYConsultas.getItems().add(new MenuItem("Ver procedimientos asignados a un medico"));
+		menuProcesosYConsultas.getItems().add(new MenuItem("Ver detalles de pacientes"));
 		
 		// Ayuda
 		Menu menuAyuda = new Menu("Ayuda");

@@ -35,6 +35,7 @@ crea un nuevo objeto de tipo FieldPanel
 	GridPane gridPane = new GridPane();
 	gridPane.setStyle("-fx-padding: 10;");
 	gridPane.setHgap(40);
+	gridPane.setVgap(10);
 	
 	Label labelTituloCriterios = new Label(tituloCriterios);
 	labelTituloCriterios.setFont(Font.font("Arial", FontWeight.BOLD, 12));
