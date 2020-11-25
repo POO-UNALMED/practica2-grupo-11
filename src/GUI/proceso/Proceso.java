@@ -1,5 +1,6 @@
 package GUI.proceso;
 
+import GUI.FieldPanel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -55,6 +56,10 @@ public abstract class Proceso {
 		
 		aceptar.setOnMouseClicked((e) -> {
 			onAccept();
+		});
+		
+		borrar.setOnMouseClicked((e) -> {
+			((FieldPanel) getOutputPane()).eraseValues();
 		});
 	
 		HBox hbox = new HBox(5, aceptar, borrar);

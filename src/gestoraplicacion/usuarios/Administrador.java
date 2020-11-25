@@ -96,6 +96,7 @@ public class Administrador extends Persona {
 		} else {
 			Solicitud nuevaSolicitud = Solicitud.crearSolicitud(pacienteAux);
 			nuevaSolicitud.setTipoActividad(tipoActividad);
+			solicitudes.add(nuevaSolicitud);
 			return nuevaSolicitud;
 		}
 	}

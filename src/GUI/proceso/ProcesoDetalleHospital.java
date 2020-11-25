@@ -41,7 +41,7 @@ public class ProcesoDetalleHospital extends Proceso {
 
 	@Override
 	protected boolean needsButton() {
-		return true;
+		return false;
 	}
 
 

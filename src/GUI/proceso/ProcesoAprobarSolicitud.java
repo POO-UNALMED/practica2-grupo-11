@@ -1,10 +1,10 @@
 package GUI.proceso;
 
 import GUI.FieldPanel;
+import GUI.exception.CostoException;
+import GUI.exception.SolicitudNoExisteException;
 import gestoraplicacion.infraestructura.Solicitud;
 import gestoraplicacion.usuarios.Administrador;
-import gestoraplicacion.usuarios.Paciente;
-import gestoraplicacion.usuarios.Persona;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
@@ -49,14 +49,42 @@ public class ProcesoAprobarSolicitud extends Proceso {
 	@Override
 	protected void onAccept() {
 		int codigoSolicitud = Integer.parseInt(field.getValue("ID de Solicitud:"));
-		int costo = Integer.parseInt(field.getValue("Costo:"));
-		Solicitud solicitud = administrador.aprobarSolicitud(codigoSolicitud, costo);
-		var alert = new Alert(AlertType.INFORMATION);
-		alert.setHeaderText(null);
-		alert.setTitle("Solicitud aprobada");
-		String mensaje = "Solicitud " + solicitud.getCodigo() + " aprobada";
-		alert.setContentText(mensaje);		
-		alert.show();		
+		try {
+			validarSolicitud(codigoSolicitud);
+			int costo = Integer.parseInt(field.getValue("Costo:"));
+			validarCosto(costo);
+			Solicitud solicitud = administrador.aprobarSolicitud(codigoSolicitud, costo);
+			var alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText(null);
+			alert.setTitle("Solicitud aprobada");
+			String mensaje = "Solicitud " + solicitud.getCodigo() + " aprobada";
+			alert.setContentText(mensaje);		
+			alert.show();	
+		} catch (SolicitudNoExisteException e) {
+			Alert alerta = new Alert(AlertType.ERROR);
+			alerta.setContentText(e.getMessage());
+			alerta.show();
+		} catch (CostoException e) {
+			Alert alerta = new Alert(AlertType.ERROR);
+			alerta.setContentText(e.getMessage());
+			alerta.show();
+		}
+			
+	}
+
+	private void validarCosto(int costo) throws CostoException {
+		if(costo <= 0) {
+			throw new CostoException();
+		}
+		
+	}
+
+	private void validarSolicitud(int codigoSolicitud) throws SolicitudNoExisteException {
+		long count = administrador.getSolicitudes().stream()
+				.filter((producto) -> producto.getCodigo() == codigoSolicitud).count();
+		if(count == 0) {
+			throw new SolicitudNoExisteException(String.valueOf(codigoSolicitud));
+		}
 	}
 
 }

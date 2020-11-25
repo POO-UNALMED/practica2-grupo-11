@@ -2,6 +2,7 @@ package GUI.proceso;
 
 
 import GUI.FieldPanel;
+import GUI.exception.NombreException;
 import gestoraplicacion.usuarios.Administrador;
 import gestoraplicacion.usuarios.Paciente;
 import gestoraplicacion.usuarios.Persona;
@@ -50,14 +51,28 @@ public class ProcesoCrearPaciente extends Proceso {
 	@Override
 	protected void onAccept() {
 		String nombre = field.getValue("Nombre completo");
-		Persona paciente = administrador.ingresarPaciente(nombre);
-		var alert = new Alert(AlertType.INFORMATION);
-		alert.setHeaderText(null);
-		alert.setTitle("Paciente creado");
-		String mensaje = "El paciente se llama " + paciente.getNombre() + " con codigo: " + paciente.getId()
-		+ " y su historia clinica es: " + ((Paciente) paciente).getHistoriaClinica().getCodigo();
-		alert.setContentText(mensaje);		
-		alert.show();
+		try {
+			validarNombre(nombre);
+			Persona paciente = administrador.ingresarPaciente(nombre);
+			var alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText(null);
+			alert.setTitle("Paciente creado");
+			String mensaje = "El paciente se llama " + paciente.getNombre() + " con codigo: " + paciente.getId()
+			+ " y su historia clinica es: " + ((Paciente) paciente).getHistoriaClinica().getCodigo();
+			alert.setContentText(mensaje);		
+			alert.show();
+		} catch (NombreException e) {
+			Alert alerta = new Alert(AlertType.ERROR);
+			alerta.setContentText(e.getMessage());
+			alerta.show();
+		}
+		
+	}
+	
+	private void validarNombre(String nombre) throws NombreException {
+		if(nombre.length() == 0) {
+			throw new NombreException();
+		}
 	}
 
 }
