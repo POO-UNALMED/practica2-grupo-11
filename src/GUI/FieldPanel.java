@@ -22,14 +22,14 @@ crea un nuevo objeto de tipo FieldPanel
 @arg valores array con los valores iniciales; Si 'null', no hay valores iniciales
 @arg habilitado array con los campos no-editables por el usuario; Si 'null', todos son editables
 */
-	public FieldPanel() {
-//public FieldPanel(String tituloCriterios, String[] criterios, String tituloValores, String[] valores, boolean[]
-//habilitado) {	
-	String tituloCriterios = "Criterios";
-	String[] criterios =  {"criterio 1", "criterio 2", "criterio 3"};
-	String tituloValores = "Titluto Valores";
-	String[] valores = {"valor 1", "valor 2", "valor 3"};
-	boolean[] habilitados = {true, true, false};
+//	public FieldPanel() {
+public FieldPanel(String tituloCriterios, String[] criterios, String tituloValores, String[] valores, boolean[]
+habilitado) {	
+//	String tituloCriterios = "Criterios";
+//	String[] criterios =  {"criterio 1", "criterio 2", "criterio 3"};
+//	String tituloValores = "Titluto Valores";
+//	String[] valores = {"valor 1", "valor 2", "valor 3"};
+//	boolean[] habilitados = {true, true, false};
 	this.criterios = criterios;
 		
 	GridPane gridPane = new GridPane();
