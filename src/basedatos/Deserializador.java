@@ -42,7 +42,6 @@ public class Deserializador {
 		File[] docs = rutaTemp.listFiles();
 		FileInputStream fis;
 		ObjectInputStream ois;
-		try {
 		
 		for (File file : docs) {
 
@@ -185,9 +184,6 @@ public class Deserializador {
 			}
 
 		}
-	} catch(Exception e) {
-		System.out.println(e);
-	}
 	}
 
 }
