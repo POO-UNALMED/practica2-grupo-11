@@ -96,7 +96,6 @@ public class Administrador extends Persona {
 		} else {
 			Solicitud nuevaSolicitud = Solicitud.crearSolicitud(pacienteAux);
 			nuevaSolicitud.setTipoActividad(tipoActividad);
-			this.agregarActividad(nuevaSolicitud);
 			return nuevaSolicitud;
 		}
 	}
@@ -204,7 +203,7 @@ public class Administrador extends Persona {
 
 	// Recibe el codigo de una solicitud, se busca en el arreglo de solicitudes y se
 	// cambia atributo aprobado a true:
-	public void aprobarSolicitud(int codigoSolicitud, int costo) {
+	public Solicitud aprobarSolicitud(int codigoSolicitud, int costo) {
 
 		for (Solicitud solicitud : solicitudes) {
 			if (solicitud.getCodigo() == codigoSolicitud) {
@@ -219,21 +218,16 @@ public class Administrador extends Persona {
 					solicitud.setProcedimiento(procedimiento); // asigno procedimiento.
 
 					solicitud.setAprobado(true); // se cambia a true el atributo aprobado.
-					System.out.println();
-					System.out.println("Se ha aprobado con exito la solicitud para "+procedimiento.getMedico().getEspecialidad());
-					System.out.println();
-					System.out.println("El medico asignado es: " + procedimiento.getMedico().getNombre()+" de "+procedimiento.getMedico().getEspecialidad());
-
-					System.out.println("El numero de habitacion asignada es: " + procedimiento.getHabitacion().getCodigo());
-					System.out.println();
+					return solicitud;
 
 				} else {
-					System.out.println("No hay habitaciones disponibles, no se puede aprobar solicitud");
+					return null;
 				}
 
 			}
 
 		}
+		return null;
 
 	}
 

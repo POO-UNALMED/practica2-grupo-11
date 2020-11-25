@@ -3,10 +3,8 @@ package basedatos;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import gestoraplicacion.infraestructura.HistoriaClinica;
@@ -25,15 +23,17 @@ public class Deserializador {
 	 * La clase File hace una abstraccion de la ruta, para que la misma sea independiente del 
 	 * sistema operativo en que trabaje.
 	 */
-	private static File rutaTemp = new File("src\\basedatos\\temp");
+//	private static File rutaTemp = new File("src\\basedatos\\temp");
+	private static File rutaTemp = new File("src/basedatos/temp");
+
 	
 	/*
 	 * 
-	 * Este método se encarda de cargar las listas de objetos que hay almacenados (serializados)
+	 * Este mï¿½todo se encarda de cargar las listas de objetos que hay almacenados (serializados)
 	 * en cada archivo. Las clases principales para deserializar son File, FileInputStream y ObjectOutputStream,
 	 * todas pertenecientes al paquete java.io.*;
 	 * 
-	 * El método se invoca al inicio de la ejecución del programa. 
+	 * El mï¿½todo se invoca al inicio de la ejecuciï¿½n del programa. 
 	 * 
 	 */
 
@@ -42,7 +42,7 @@ public class Deserializador {
 		File[] docs = rutaTemp.listFiles();
 		FileInputStream fis;
 		ObjectInputStream ois;
-
+		try {
 		
 		for (File file : docs) {
 
@@ -185,6 +185,9 @@ public class Deserializador {
 			}
 
 		}
+	} catch(Exception e) {
+		System.out.println(e);
+	}
 	}
 
 }

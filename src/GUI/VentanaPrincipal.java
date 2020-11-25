@@ -3,8 +3,12 @@ package GUI;
 import java.util.LinkedList;
 
 import GUI.proceso.Proceso;
+import GUI.proceso.ProcesoAprobarSolicitud;
 import GUI.proceso.ProcesoCrearPaciente;
+import GUI.proceso.ProcesoCrearSolicitud;
 import GUI.proceso.ProcesoDetalleHospital;
+import GUI.proceso.ProcesoListaPacientes;
+import GUI.proceso.ProcesoListaSolicitudesSinAprobar;
 import basedatos.BDDriver;
 import basedatos.Deserializador;
 import basedatos.Serializador;
@@ -14,21 +18,24 @@ import gestoraplicacion.usuarios.Administrador;
 import gestoraplicacion.usuarios.Medico;
 import gestoraplicacion.usuarios.Persona;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class VentanaPrincipal extends Application {
-	
-	
 
 	Stage window;
 	LinkedList<Proceso> lista = new LinkedList<>();
 	static Administrador administrador;
 	static Hospital hospital;
+	BorderPane border;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -36,14 +43,19 @@ public class VentanaPrincipal extends Application {
 		
 		lista.add(new ProcesoDetalleHospital(administrador));
 		lista.add(new ProcesoCrearPaciente(administrador));
+		lista.add(new ProcesoListaPacientes(administrador));
+		lista.add(new ProcesoCrearSolicitud(administrador));
+		lista.add(new ProcesoListaSolicitudesSinAprobar(administrador));
+		lista.add(new ProcesoAprobarSolicitud(administrador));
 		
-		BorderPane border = new BorderPane();
+		border = new BorderPane();
 		border.setTop(mainMenu());
-		border.setCenter(lista.get(1).getVBox());
+		border.setCenter(lista.get(0).getVBox());
 				
-		Scene scene = new Scene(border, 500, 500);
+		Scene scene = new Scene(border);
 		window.setScene(scene);
 		window.setTitle("Helth - Usuario: Administrador");
+		window.setMaximized(true);
 		window.show();
 	}
 	
@@ -57,12 +69,30 @@ public class VentanaPrincipal extends Application {
 		// Procesos y Consultas
 		Menu menuProcesosYConsultas = new Menu("Procesos y Consultas");
 		lista.forEach((proceso) -> {
-			menuProcesosYConsultas.getItems().add(new MenuItem(proceso.getNombre()));
+			MenuItem menuItem = new MenuItem(proceso.getNombre());
+			menuProcesosYConsultas.getItems().add(menuItem);
+			menuItem.setOnAction(new EventHandler<ActionEvent>() {
+				// cambiar la pantalla
+			    public void handle(ActionEvent t) {
+			       border.setCenter(proceso.getVBox());
+			    }
+			});
 		});
 		
 		// Ayuda
 		Menu menuAyuda = new Menu("Ayuda");
-		menuAyuda.getItems().add(new MenuItem("Acerca de"));
+		MenuItem acercaDe = new MenuItem("Acerca de");
+		acercaDe.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent t) {
+				var alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText(null);
+				alert.setTitle("Acerca");
+				String mensaje = "Desarrollado por Richard Montoya - C.C. 1039461483";
+				alert.setContentText(mensaje);
+				alert.show();
+			}
+		});
+		menuAyuda.getItems().add(acercaDe);
 		
 		
 		MenuBar barraPrincipla = new MenuBar();
@@ -125,8 +155,8 @@ public class VentanaPrincipal extends Application {
 		 * Este codigo se ejecuta desde el inicio de la aplicaicon
 		 */
 
-//		Deserializador.deserializar();
-//		
+		Deserializador.deserializar();
+		
 		hospital = BDDriver.hospitales.get(0);
 		administrador = BDDriver.administradores.get(0);
 

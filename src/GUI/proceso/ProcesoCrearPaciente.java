@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 public class ProcesoCrearPaciente extends Proceso {
 	
-	private static final String BLOCKING_INFO_ALERT = null;
+//	private static final String BLOCKING_INFO_ALERT = null;
 	Administrador administrador;
 	FieldPanel field;
 
@@ -52,8 +52,8 @@ public class ProcesoCrearPaciente extends Proceso {
 		String nombre = field.getValue("Nombre completo");
 		Persona paciente = administrador.ingresarPaciente(nombre);
 		var alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle(BLOCKING_INFO_ALERT);
-		alert.setHeaderText(BLOCKING_INFO_ALERT);
+		alert.setHeaderText(null);
+		alert.setTitle("Paciente creado");
 		String mensaje = "El paciente se llama " + paciente.getNombre() + " con codigo: " + paciente.getId()
 		+ " y su historia clinica es: " + ((Paciente) paciente).getHistoriaClinica().getCodigo();
 		alert.setContentText(mensaje);		
