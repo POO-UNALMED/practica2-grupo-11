@@ -63,8 +63,13 @@ public class VentanaPrincipal extends Application {
 	private MenuBar mainMenu() {
 		// Archivo
 		Menu menuArchivo = new Menu("Archivo");
-		menuArchivo.getItems().addAll(new MenuItem("Abrir"),
-									  new MenuItem("Guardar"));
+		MenuItem salirItem = new MenuItem("Salir");
+		menuArchivo.getItems().addAll(salirItem);
+		salirItem.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent t) {
+				System.exit(0);
+			}
+		});
 		
 		// Procesos y Consultas
 		Menu menuProcesosYConsultas = new Menu("Procesos y Consultas");

@@ -23,8 +23,8 @@ public class Deserializador {
 	 * La clase File hace una abstraccion de la ruta, para que la misma sea independiente del 
 	 * sistema operativo en que trabaje.
 	 */
-//	private static File rutaTemp = new File("src\\basedatos\\temp");
-	private static File rutaTemp = new File("src/basedatos/temp");
+	private static File rutaTemp = new File("src\\basedatos\\temp");
+	// private static File rutaTemp = new File("src/basedatos/temp");
 
 	
 	/*

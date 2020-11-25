@@ -9,8 +9,8 @@ import java.io.PrintWriter;
 
 
 public class Serializador {
-//	private static File rutaTemp = new File("src\\basedatos\\temp");
-	private static File rutaTemp = new File("src/basedatos/temp");
+	private static File rutaTemp = new File("src\\basedatos\\temp");
+//	private static File rutaTemp = new File("src/basedatos/temp");
 
 
 	/*
